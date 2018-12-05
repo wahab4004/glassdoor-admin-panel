@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+/* .navbar-inverse{
+    border-radius: 0%;
+   }
+
+.dropdown-toggle{
+    margin-right: 15px;
+}
+
+.dropdown-menu{
+    margin-right: 15px;
+} */
+
+.invalid-feedback{
+    color: red;
+}
+  input.invalid{ 
+  border: 1px solid red;
+  }
+  select.invalid{ 
+  border: 1px solid red;
+  }
+  teaxttarea.invalid{ 
+  border: 1px solid red;
+  }
+  .is-invalid{
+      border: 1px solid red;
+  }
+
+  /* .form-control{
+      width: 180px;
+  } */

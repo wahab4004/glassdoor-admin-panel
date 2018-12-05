@@ -1,0 +1,24 @@
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a routerLink=""><b>Glass</b>DOOR</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Please Enter your Email Address!</p>
+      <br>
+      <form (submit)="request(requestForm)" #requestForm="ngForm">
+        <div class="form-group has-feedback has-error" [ngClass]="{'has-error': email.invalid && requestForm.submitted}">
+          <input type="email" class="form-control" name="email" ngModel placeholder="Email Address" #email="ngModel" required email>
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          <p class="help-block" *ngIf="email.invalid && requestForm.submitted">Please Enter Valid Email Address!</p>
+        </div><br>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>

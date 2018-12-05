@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Admins
+      <small>Manage Admins</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Manage Admins</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Add Admin</h3>
+          </div>
+
+          <form #adminForm="ngForm" (submit)="addAdmin(adminForm)">
+            <div class="box-body">
+                <div class="form-group">
+                <input type="text" class="form-control" name="user" ngModel placeholder="Enter Your Name" #user="ngModel"
+                  [ngClass]="{'is-invalid': adminForm.submitted && user.invalid}" required />
+                <div *ngIf="adminForm.submitted && password.invalid" class="invalid-feedback">
+                  <div *ngIf="user.errors.required">Name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" ngModel placeholder="Enter email" #email="ngModel"
+                  [ngClass]="{'is-invalid': adminForm.submitted && email.invalid}" required email />
+                <div *ngIf="adminForm.submitted && email.invalid" class="invalid-feedback">
+                  <div *ngIf="email.errors.required">Email is required</div>
+                  <div *ngIf="email.errors.email">Enter valid email address</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" ngModel placeholder="Password" minlength="8"
+                  #password="ngModel" [ngClass]="{'is-invalid': adminForm.submitted && password.invalid}" required
+                  password />
+                <div *ngIf="adminForm.submitted && password.invalid" class="invalid-feedback">
+                  <div *ngIf="password.errors.required">password is required</div>
+                  <div *ngIf="password.errors.minlength">password must be atleast 8 characters</div>
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">Responsive Hover Table</h3>
+          </div>
+
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+              </tr>
+              <tr *ngFor="let value of admin">
+                <td> {{value.name}} </td>
+                <td> {{value.email}} </td>
+                <td> {{value.status}} </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
