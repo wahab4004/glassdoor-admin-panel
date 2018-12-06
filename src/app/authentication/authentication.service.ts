@@ -15,7 +15,11 @@ export class AuthenticationService {
   }
   constructor(public httpClient: HttpClient, public router: Router, public activtedRoute:
     ActivatedRoute) { }
-  //service for login
+
+  /**
+   * Service for login
+   * @param f 
+   */
   async login(f) {
     let response = await this.httpClient.post(`${environment.apiBase}/admin/login`, f).toPromise();
     localStorage.setItem('token', `${(response as any).authToken}`);
@@ -24,7 +28,10 @@ export class AuthenticationService {
       await this.getProfile();
     }
   }
-  //service for profile
+
+  /**
+   * Service for get profile
+   */
   async getProfile() {
     try {
       let token = localStorage.getItem('token')
@@ -37,7 +44,11 @@ export class AuthenticationService {
       console.log(error);
     }
   }
-  //service for reset-password
+
+  /**
+   * Service for reset password
+   * @param f 
+   */
   async reset(f) {
     try {
       let response = await this.httpClient.post(`${environment.apiBase}/admin/reset-password`, f).toPromise();
@@ -47,17 +58,19 @@ export class AuthenticationService {
       console.log(error)
     }
   }
-  //service for add admin
-  // add(f) {
-  //   return this.httpClient.post(`${environment.apiBase}/add-admin`, f).toPromise();
-  // }
 
-  //service for request-password
+  /**
+   * Service for request password
+   * @param body 
+   */
   async request(body) {
     let response = await this.httpClient.post(`${environment.apiBase}/admin/request-password`, body).toPromise();
     return response;
   }
-  //service for logged-in
+
+  /**
+   * Service for loggedin
+   */
   async isloggedin() {
     try {
       let body = { authToken: localStorage.getItem('token') };
@@ -73,7 +86,10 @@ export class AuthenticationService {
       console.log(error)
     }
   }
-  //service for logout
+
+  /**
+   * Service for logout
+   */
   async logout() {
     await this.getProfile();
     try {

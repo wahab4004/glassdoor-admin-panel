@@ -20,7 +20,14 @@ export class AdminService {
   /**
    * Service for get all admins
    */
-  getAllAdmin(){
+  getAllAdmin() {
     return this.httpClient.get(`${environment.apiBase}/admin`).toPromise();
+  }
+  /**
+   * Service for delete admin
+   * @param id 
+   */
+  deleteAdmin(id) {
+    return this.httpClient.delete(`${environment.apiBase}/admin?id=${id}`).toPromise();
   }
 }

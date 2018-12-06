@@ -12,6 +12,10 @@ export class RequestPasswordComponent implements OnInit {
   
   ngOnInit() {
   }
+  /**
+   * 
+   * @param requestForm 
+   */
   async request(requestForm) {
     try {
       if (requestForm.valid) {

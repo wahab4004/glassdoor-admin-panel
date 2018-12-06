@@ -26,7 +26,6 @@ error='';
       } catch (error) { 
          console.log(error.error.message);
          loginForm.controls.email.setErrors({server: error.error.message});
-        //  loginForm.controls.password.setErrors({server: error.error.message});
       }
     }
   }

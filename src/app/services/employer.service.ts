@@ -12,8 +12,12 @@ export class EmployerService {
   constructor(public httpClient: HttpClient, public router: Router, public activatedRoute: ActivatedRoute) { }
 
 
-  getAllEmployee(q, limit, skip , page){
-    return this.httpClient.get(`${environment.apiBase}/search-employer?q=${q}&limit=${limit}&skip=${skip}&page=${page}`).toPromise();
+  getAllEmployee(limit , skip){
+    return this.httpClient.get(`${environment.apiBase}/admin/employer?limit=${limit}&skip=${skip}`).toPromise();
+  }
+
+  deleteEmployer(id){
+    return this.httpClient.delete(`${environment.apiBase}/admin/employer?id=${id}`).toPromise();
   }
 
 }
