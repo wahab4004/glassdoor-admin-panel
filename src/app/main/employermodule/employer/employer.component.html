@@ -1,78 +1,125 @@
 <div class="content-wrapper">
-    <section class="content-header">
-      <h1>
-        Employers
-        <small>Manage Employers</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active" routerLink="/employer">Manage Employer</li>
-      </ol>
-    </section>
+  <section class="content-header">
+    <h1>
+      Employers
+      <small>Manage Employers</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active" routerLink="/employer">Manage Employer</li>
+    </ol>
+  </section>
 
-    <section class="content">
-      <div class="row">
-          <div class="col-xs-12 box-body">
-            <div class="box box-primary">
-              <div class="box-header">
-                <h3 class="box-title">Responsive Hover Table</h3>
-                <form #searchForm="ngForm" (submit)="search(searchForm)">
-              </form>
-              </div>
-              <div class="box-body table-responsive no-padding">
-                <table class="table table-hover ">
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Location</th>
-                    <th>Jobs</th>
-                    <th>Employees</th>
-                    <th>Website</th>
-                    <th>About</th>
-                    <th>Company</th>
-                    <th>Description</th>
-                    <th>Delete</th>
-                  </tr>
-                  
-                  <tr *ngFor="let value of employers">
-                    <td>{{value.name}}</td>
-                    <td>{{value.email}}</td>
-                    <td>{{value.location}}</td>
-                    <td>{{value.numberOfJobs}}</td>
-                    <td>{{value.numberOfEmployees}}</td>
-                    <td>{{value.website}}</td>
-                    <td>{{value.about}}</td>
-                    <td>{{value.companyCategory}}</td>
-                    <td>{{value.description}}</td>
-                    <td>
-                      <i (click)="delete(value._id)" class="btn btn-danger glyphicon glyphicon-trash"></i>
-                    </td>
-                  </tr>
-                </table>
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12 box-body">
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">Responsive Hover Table</h3>
+          </div>
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover ">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Employees</th>
+                <th>Website</th>
+                <th>About</th>
+                <th>Company</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
 
-                <div class="row">
-                  <div class="col-sm-offset-8 col-sm-4">
-                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                      <ul class="pagination">
-                        <li class="paginate_button previous disabled" id="example2_previous">
-                          <a (click)="prePageButton()" style="cursor:pointer">
-                            Previous
-                          </a>
-                        </li>
-                        <li *ngFor="let item of totalNumbers" [ngClass]="{'active': item == page}">
-                          <a (click)="nextPage(item)" style="cursor:pointer">{{item}}</a>
-                        </li>
-                        <li class="paginate_button next" id="example2_next">
-                          <a (click)="nextPageButton()" style="cursor:pointer">Next</a>
-                        </li>
-                      </ul>
-                    </div>
+              <tr *ngFor="let value of employers">
+                <td>{{value.name}}</td>
+                <td>{{value.email}}</td>
+                <td>{{value.location}}</td>
+                <td>{{value.numberOfEmployees}}</td>
+                <td>{{value.website}}</td>
+                <td>{{value.about}}</td>
+                <td>{{value.companyCategory}}</td>
+                <td>
+                  <i (click)="selectedData(value)" class="btn btn-info glyphicon glyphicon-edit" data-toggle="modal"
+                    data-target="#myModal"></i>
+                </td>
+                <td>
+                  <i (click)="delete(value._id)" class="btn btn-danger glyphicon glyphicon-trash"></i>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Employer</h4>
                   </div>
+                  <div class="modal-body">
+                    <form (submit)="addEmployer(employerForm)" #employerForm="ngForm">
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="companyName" [ngModel]="selectedRow.name" 
+                         placeholder="Enter Your Company Name">
+                      </div>
+                      <div class="form-group">
+                        <input type="email" class="form-control" name="email" [ngModel]="selectedRow.email"
+                         placeholder="Enter Your Email">
+                      </div>
+                      <div class="form-group">
+                        <input type="location" class="form-control" name="location" [ngModel]="selectedRow.location"
+                         placeholder="Enter Your Location">
+                      </div>
+                      <div class="form-group">
+                        <input type="employee" class="form-control" name="employee" [ngModel]="selectedRow.numberOfEmployees"
+                         placeholder="Enter Number of Employee">
+                      </div>
+                      <div class="form-group">
+                        <input type="website" class="form-control" name="website" [ngModel]="selectedRow.website"
+                         placeholder="Enter Company Website">
+                      </div>
+                      <div class="form-group">
+                        <input type="about" class="form-control" name="about" [ngModel]="selectedRow.about"
+                         placeholder="Enter About Your Company">
+                      </div>
+                      <div class="form-group">
+                        <input type="company" class="form-control" name="company" [ngModel]="selectedRow.companyCategory"
+                         placeholder="Your Company Type">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default"> Submit </button>
+                      </div>
+                  </form>
+                  </div>
+                </div>
               </div>
+            </div>
 
+            <!-- Pagination -->
+            <div class="row">
+              <div class="col-sm-offset-8 col-sm-4">
+                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                  <ul class="pagination">
+                    <li class="paginate_button previous disabled" id="example2_previous">
+                      <a (click)="prePageButton()" style="cursor:pointer">
+                        Previous
+                      </a>
+                    </li>
+                    <li *ngFor="let item of totalNumbers" [ngClass]="{'active': item == page}">
+                      <a (click)="nextPage(item)" style="cursor:pointer">{{item}}</a>
+                    </li>
+                    <li class="paginate_button next" id="example2_next">
+                      <a (click)="nextPageButton()" style="cursor:pointer">Next</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 </div>

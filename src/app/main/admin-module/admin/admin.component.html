@@ -18,30 +18,37 @@
             <h3 class="box-title">Add Admin</h3>
           </div>
 
-          <form #adminForm="ngForm" (submit)="addAdmin(adminForm)">
+          <form (submit)="addAdmin(adminForm)" #adminForm="ngForm">
             <div class="box-body">
-                <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="name" ngModel placeholder="Enter Your Name" #name="ngModel"
-                  [ngClass]="{'is-invalid': adminForm.submitted && name.invalid}" required />
-                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                <div *ngIf="adminForm.submitted && password.invalid" class="invalid-feedback">
+              <div class="form-group has-feedback">
+                <input type="text" class="form-control" name="name" ngModel 
+                  placeholder="Enter Your Name" #name="ngModel"
+                  [ngClass]="{'is-invalid': adminForm.submitted && name.invalid}" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <div *ngIf="adminForm.submitted && name.invalid" class="invalid-feedback">
                   <div *ngIf="name.errors.required">Name is required</div>
                 </div>
               </div>
+
               <div class="form-group has-feedback">
-                <input type="email" class="form-control" name="email" ngModel placeholder="Enter email" #email="ngModel"
-                  [ngClass]="{'is-invalid': adminForm.submitted && email.invalid}" required email>
-                  <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <input type="email" class="form-control" name="email" ngModel 
+                  placeholder="Enter Your Email" #email="ngModel"
+                  [ngClass]="{'is-invalid': adminForm.submitted && email.invalid}" required email />
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 <div *ngIf="adminForm.submitted && email.invalid" class="invalid-feedback">
-                  <div *ngIf="email.errors.required">Email is required</div>
-                  <div *ngIf="email.errors.email">Enter valid email address</div>
-                </div>
+                  <p>
+                      {{email.errors.required? 'Email address is requried.' : ''}}
+                      {{email.errors.email? 'Email address is not valid.' : ''}}
+                      {{email.errors.server? email.errors.server : ''}}
+                  </p>
+                 </div>
               </div>
+
               <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" ngModel placeholder="Password" minlength="8"
-                  #password="ngModel" [ngClass]="{'is-invalid': adminForm.submitted && password.invalid}" required
-                  password />
-                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <input type="password" class="form-control" name="password" ngModel 
+                  placeholder="Password" minlength="8" #password="ngModel" 
+                  [ngClass]="{'is-invalid': adminForm.submitted && password.invalid}" required/>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 <div *ngIf="adminForm.submitted && password.invalid" class="invalid-feedback">
                   <div *ngIf="password.errors.required">password is required</div>
                   <div *ngIf="password.errors.minlength">password must be atleast 8 characters</div>

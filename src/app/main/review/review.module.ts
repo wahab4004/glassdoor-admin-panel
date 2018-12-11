@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReviewComponent } from './review/review.component';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
+const routes : Routes = [
   {
-    path:'',
-    loadChildren:'./blank/blank.module#BlankModule'
-  },
-
+    path:'review',
+    component:ReviewComponent
+  }
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [ReviewComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
   ]
 })
-export class DashboardModule { }
+export class ReviewModule { }

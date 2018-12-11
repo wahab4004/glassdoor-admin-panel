@@ -26,6 +26,18 @@ const routes: Routes = [
       {
         path:'',
         loadChildren:'./admin-module/admin-module.module#AdminModuleModule'
+      },
+      {
+        path:'',
+        loadChildren:'./review/review.module#ReviewModule'
+      },
+      {
+        path:'',
+        loadChildren:'./salary/salary.module#SalaryModule'
+      },
+      {
+        path:'',
+        loadChildren:'./interview/interview.module#InterviewModule'
       }
     ]
   }

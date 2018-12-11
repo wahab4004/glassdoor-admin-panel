@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
-import { NgForm } from '@angular/forms';
-
+import swal from 'sweetalert';
+import { EmailValidator } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 error='';
+email: any;
   constructor(public authService: AuthenticationService) { }
 
   ngOnInit() {
@@ -18,14 +19,15 @@ error='';
    * Logs in the system
    * @param loginForm 
    */
-  async login(loginForm : NgForm){
+  async login(loginForm){
     if (loginForm.valid) {
       let body = loginForm.value;
       try {
         let response = await this.authService.login(body) as any;
       } catch (error) { 
-         console.log(error.error.message);
          loginForm.controls.email.setErrors({server: error.error.message});
+         
+         
       }
     }
   }

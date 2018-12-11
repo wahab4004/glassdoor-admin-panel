@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SalaryComponent } from './salary/salary.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'',
-    loadChildren:'./blank/blank.module#BlankModule'
-  },
-
+    path:'salary',
+    component:SalaryComponent
+  }
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [SalaryComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
   ]
 })
-export class DashboardModule { }
+export class SalaryModule { }

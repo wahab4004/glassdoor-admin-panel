@@ -19,6 +19,16 @@ export class EmployerComponent implements OnInit {
   page: any = 1;
   employers = [];
   q;
+  selectedRow = {
+    name:'',
+    email:'',
+    location:'',
+    numberOfEmployees:'',
+    website:'',
+    about:'',
+    companyCategory:''
+  }
+  
 
   /**
    * 
@@ -35,6 +45,18 @@ export class EmployerComponent implements OnInit {
       this.getEmployer(this.q);
     })
   }
+
+  async addEmployer(employerForm){
+    if(employerForm.valid){
+      let body = employerForm.value;
+      console.log(body)
+    }
+  }
+
+   selectedData(value){
+    //  console.log(value);
+     this.selectedRow = value;
+   }
 
   /**
    * Method get all employer from database

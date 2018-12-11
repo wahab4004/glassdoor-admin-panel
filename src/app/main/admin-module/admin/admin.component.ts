@@ -34,17 +34,19 @@ export class AdminComponent implements OnInit {
     try {
       let body = adminForm.value
       let response = await this.adminService.add(body) as any;
-      // console.log(response);
     } catch (error) {
-      console.log(error);
+      // console.log(error.error.message);
+      adminForm.controls.email.setErrors({ server: error.error.message })
     }
     if (adminForm.valid) {
       let body = adminForm.value;
-      // console.log(body);
+      swal({
+        title: "Added",
+        icon: "success",
+      })
+      await this.getAdmin()
     }
-
   }
-
   /**
    * Method to get all admins
    */
@@ -53,7 +55,6 @@ export class AdminComponent implements OnInit {
       let response = await this.adminService.getAllAdmin() as any;
       this.admin = response;
     } catch (error) {
-
     }
   }
   /**
@@ -75,5 +76,4 @@ export class AdminComponent implements OnInit {
         }
       })
   }
-
 }

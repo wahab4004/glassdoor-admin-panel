@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InterviewComponent } from './interview/interview.component';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
+const routes : Routes = [
   {
-    path:'',
-    loadChildren:'./blank/blank.module#BlankModule'
-  },
-
+    path:'interview',
+    component:InterviewComponent
+  }
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [InterviewComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
   ]
 })
-export class DashboardModule { }
+export class InterviewModule { }

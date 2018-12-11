@@ -1,78 +1,144 @@
 <div class="content-wrapper">
-    <section class="content-header">
-      <h1>
-        Users
-        <small>Manage Users</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Users</li>
-      </ol>
-    </section>
+  <section class="content-header">
+    <h1>
+      Users
+      <small>Manage Users</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Manage Users</li>
+    </ol>
+  </section>
 
-    <section class="content">
+  <section class="content">
     <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">Responsive Hover Table</h3>
+      <div class="col-xs-12">
+        <div class="box box-primary">
+          <div class="box-header">
+            <h3 class="box-title">Responsive Hover Table</h3>
 
-            </div>
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Company</th>
-                    <th>Phone</th>
-                    <th>City</th>
-                    <th>Country</th>
-                    <th>State</th>
-                    <th>DOB</th>
-                    <th>Experience</th>
-                    <th>Address</th>
-                    <th>Delete</th>
-                </tr>
+          </div>
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Company</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>DOB</th>
+                <th>Experience</th>
+                <th>Address</th>
+                <th>Disable</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
 
-                <tr *ngFor="let value of users">
-                    <td>{{value.username}}</td>
-                    <td>{{value.email}}</td>
-                    <td>{{value.company}}</td>
-                    <td>{{value.phone}}</td>
-                    <td>{{value.city}}</td>
-                    <td>{{value.country}}</td>
-                    <td>{{value.state}}</td>
-                    <td>{{value.dateOfBirth}}</td>
-                    <td>{{value.experience}}</td>
-                    <td>{{value.addressLine1}}</td>
-                    <td>
-                      <i (click)="delete(value._id)" class="btn btn-danger glyphicon glyphicon-trash"></i>
-                    </td>
-                  </tr>
-              </table>
-              
-              <div class="row">
-                  <div class="col-sm-offset-8 col-sm-4">
-                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                      <ul class="pagination">
-                        <li class="paginate_button previous disabled" id="example2_previous">
-                          <a (click)="prePageButton()" style="cursor:pointer">
-                            Previous
-                          </a>
-                        </li>
-                        <li *ngFor="let item of totalNumbers" [ngClass]="{'active': item == page}">
-                          <a (click)="nextPage(item)" style="cursor:pointer">{{item}}</a>
-                        </li>
-                        <li class="paginate_button next" id="example2_next">
-                          <a (click)="nextPageButton()" style="cursor:pointer">Next</a>
-                        </li>
-                      </ul>
-                    </div>
+              <tr *ngFor="let value of users">
+                <td>{{value.username}}</td>
+                <td>{{value.email}}</td>
+                <td>{{value.company}}</td>
+                <td>{{value.phone}}</td>
+                <td>{{value.city}}</td>
+                <td>{{value.country}}</td>
+                <td>{{value.state}}</td>
+                <td>{{value.dateOfBirth}}</td>
+                <td>{{value.experience}}</td>
+                <td>{{value.addressLine1}}</td>
+                <td> &nbsp;
+                  <input type="checkbox" class="minimal">
+                </td>
+                <td>
+                  <i (click)="selectedData(value)" class=" btn btn-info glyphicon glyphicon-edit" data-toggle="modal"
+                    data-target="#myModal"></i>
+                </td>
+                <td>
+                  <i (click)="delete(value._id)" class="btn btn-danger glyphicon glyphicon-trash"></i>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit User</h4>
                   </div>
+                  <div class="modal-body">
+                    <form #userForm="ngForm" (submit)="addUser(userForm)">
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="name" [ngModel]="selectedRow.username"
+                          placeholder="Enter Your Name" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="email" [ngModel]="selectedRow.email" placeholder="Enter Your Email" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="company" [ngModel]="selectedRow.company"
+                          placeholder="Enter Your Company" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="phone" [ngModel]="selectedRow.phone" placeholder="Enter Your Number" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="city" [ngModel]="selectedRow.city" placeholder="Enter Your City" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="country" [ngModel]="selectedRow.country"
+                          placeholder="Enter Your Country" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="state" [ngModel]="selectedRow.state" placeholder="Enter Your State" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="dob" [ngModel]="selectedRow.dateOfBirth"
+                          placeholder="Enter Your DOB" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="experience" [ngModel]="selectedRow.experience"
+                          placeholder="Enter Your Experience" />
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="address" [ngModel]="selectedRow.addressLine1"
+                          placeholder="Enter Your Address" />
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default"> Submit </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="row">
+              <div class="col-sm-offset-8 col-sm-4">
+                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                  <ul class="pagination">
+                    <li class="paginate_button previous disabled" id="example2_previous">
+                      <a (click)="prePageButton()" style="cursor:pointer">
+                        Previous
+                      </a>
+                    </li>
+                    <li *ngFor="let item of totalNumbers" [ngClass]="{'active': item == page}">
+                      <a (click)="nextPage(item)" style="cursor:pointer">{{item}}</a>
+                    </li>
+                    <li class="paginate_button next" id="example2_next">
+                      <a (click)="nextPageButton()" style="cursor:pointer">Next</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </section>
+    </div>
+  </section>
 </div>

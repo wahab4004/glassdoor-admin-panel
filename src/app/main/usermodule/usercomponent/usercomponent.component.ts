@@ -19,6 +19,18 @@ export class UsercomponentComponent implements OnInit {
   page: any = 1;
   user = [];
   q;
+  selectedRow = {
+    username:'',
+    email:'',
+    company:'',
+    phone:'',
+    city:'',
+    country:'',
+    state:'',
+    dateOfBirth:'',
+    experience:'',
+    addressLine1:''
+  }
 
   /**
    * 
@@ -33,9 +45,21 @@ export class UsercomponentComponent implements OnInit {
       this.page = queryparams.page || 1;
       this.getUser(this.q);
     })
-
   }
 
+  async addUser(userForm){
+    if(userForm.valid){
+      let body = userForm.value;
+      console.log(body)
+
+    }
+  }
+
+  selectedData(value){
+    // console.log(value)
+    this.selectedRow = value;
+  }
+  
   /**
    * Method Get all user from database
    * @param q query parameter 
