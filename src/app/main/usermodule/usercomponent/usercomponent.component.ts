@@ -16,7 +16,7 @@ export class UsercomponentComponent implements OnInit {
   total: any;
   totalPages: any;
   totalNumbers = [];
-  page: any = 1;
+  page : any = 1;
   user = [];
   q;
   selectedRow = {
@@ -32,12 +32,6 @@ export class UsercomponentComponent implements OnInit {
     addressLine1:''
   }
 
-  /**
-   * 
-   * @param userService 
-   * @param activatedRoute 
-   * @param router 
-   */
   constructor(public userService: UserService, public activatedRoute: ActivatedRoute, public router: Router) { }
 
   ngOnInit() {
@@ -51,7 +45,6 @@ export class UsercomponentComponent implements OnInit {
     if(userForm.valid){
       let body = userForm.value;
       console.log(body)
-
     }
   }
 

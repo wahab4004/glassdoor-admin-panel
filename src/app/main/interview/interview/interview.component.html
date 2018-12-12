@@ -1,8 +1,7 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      Interview page
-      <small>it all starts here</small>
+      Interview
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -18,62 +17,67 @@
           <div class="box-header">
             <h3 class="box-title">Responsive Hover Table</h3>
 
-            <div class="box-tools">
-              <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                <div class="input-group-btn">
-                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                </div>
-              </div>
-            </div>
+            
           </div>
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
-                <th>ID</th>
-                <th>User</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Reason</th>
-                <th>Disable</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Job Title</th>
+                <th>Experience</th>
+                <th>Method</th>
+                <th>Interview Month</th>
+                <th>Interview Year</th>
+                <th>Interview Location</th>
+                <th>IQ Test</th>
+                <th>Presentation</th>
+                <th>Offer</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
-              <tr>
-                <td>183</td>
-                <td>John Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="label label-success">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                <td> 
-                    <input type="checkbox" class="glyphicon glyphicon-checkbox">
-                </td>
+              <tr *ngFor="let value of interviews">
+                <td> {{value.employer.name}} </td>
+                <td> {{value.employer.email}} </td>
+                <td> {{value.jobTitle}} </td>
+                <td> {{value.overallExperience}} </td>
+                <td> {{value.method}} </td>
+                <td> {{value.interviewMonth}} </td>
+                <td> {{value.interviewYear}} </td>
+                <td> {{value.interviewLocation}} </td>
+                <td> {{value.isIQTest}} </td>
+                <td> {{value.isPresentation}} </td>
+                <td> {{value.receivedOffer}} </td>
                 <td>
                   <i class=" btn btn-info glyphicon glyphicon-edit" data-toggle="modal"
-                    data-target="#myModal"></i>
+                  data-target="#myModal"></i>
                 </td>
                 <td>
-                  <i class="btn btn-danger glyphicon glyphicon-trash"></i>
-                </td>
-              </tr>
-              <tr>
-                <td>219</td>
-                <td>Alexander Pierce</td>
-                <td>11-7-2014</td>
-                <td><span class="label label-warning">Pending</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                <td> 
-                    <input type="checkbox" class="glyphicon glyphicon-checkbox">
-                </td>
-                <td>
-                  <i class=" btn btn-info glyphicon glyphicon-edit"></i>
-                </td>
-                <td>
-                  <i class="btn btn-danger glyphicon glyphicon-trash"></i>
+                  <i (click)="delete()" class="btn btn-danger glyphicon glyphicon-trash"></i>
                 </td>
               </tr>
             </table>
+
+            <!-- pagination -->
+            <div class="row">
+                <div class="col-sm-offset-8 col-sm-4">
+                  <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                    <ul class="pagination">
+                      <li class="paginate_button previous disabled" id="example2_previous">
+                        <a (click)="prePageButton()" style="cursor:pointer">
+                          Previous
+                        </a>
+                      </li>
+                      <li *ngFor="let item of totalNumbers" [ngClass]="{'active': item == page}">
+                        <a (click)="nextPage(item)" style="cursor:pointer">{{item}}</a>
+                      </li>
+                      <li class="paginate_button next" id="example2_next">
+                        <a (click)="nextPageButton()" style="cursor:pointer">Next</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
